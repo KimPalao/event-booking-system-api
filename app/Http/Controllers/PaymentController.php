@@ -6,6 +6,7 @@ use App\Services\PaymentService;
 use Illuminate\Http\Request;
 use App\Models\Booking;
 use App\Models\Payment;
+use App\Notifications\BookingConfirmed;
 
 class PaymentController extends Controller
 {
@@ -31,6 +32,7 @@ class PaymentController extends Controller
 
         if ($paymentStatus) {
             $booking->update(['status' => 'confirmed']);
+            $booking->user->notify(new BookingConfirmed($booking));
             return response()->json(['message' => 'Payment successful', 'data' => $payment], 201);
         }
 

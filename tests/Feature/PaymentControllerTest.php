@@ -43,6 +43,8 @@ class PaymentControllerTest extends TestCase
         ]);
         $token = $response->json('token');
         $response = $this->postJson("/api/bookings/{$booking->id}/payment", [], ['Authorization' => 'Bearer ' . $token]);
+
+
     }
 
     public function test_view_payment_as_customer(): void
