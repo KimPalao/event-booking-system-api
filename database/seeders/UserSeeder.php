@@ -1,18 +1,19 @@
 <?php
-
 namespace Database\Seeders;
 
-use App\Models\Booking;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\User;
 
-class BookingSeeder extends Seeder
+class UserSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        Booking::factory()->count(20)->create();
+        User::factory()->isAdmin()->count(2)->create();
+        User::factory()->isOrganizer()->count(3)->create();
+        User::factory()->count(10)->create();
     }
 }
