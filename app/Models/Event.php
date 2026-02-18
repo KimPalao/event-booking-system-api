@@ -8,6 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Event extends Model
 {
+    public $fillable = [
+        'title',
+        'description',
+        'date',
+        'location',
+        'created_by',
+    ];
+
     /** @use HasFactory<\Database\Factories\EventFactory> */
     use HasFactory, HasUuids;
 
