@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Middleware\HasOrganizerPermissions;
 
 Route::controller(AuthController::class)->group(function () {
@@ -33,4 +34,9 @@ Route::controller(BookingController::class)->group(function () {
     Route::get('/bookings', 'index')->middleware('auth:sanctum');
     Route::post('/tickets/{ticket}/bookings', 'store')->middleware('auth:sanctum');
     Route::put('/bookings/{booking}/cancel', 'cancel')->middleware('auth:sanctum');
+});
+
+Route::controller(PaymentController::class)->group(function () {
+    Route::post('/bookings/{booking}/payment', 'store')->middleware('auth:sanctum');
+    Route::get('/payments/{payment}', 'show')->middleware('auth:sanctum');
 });

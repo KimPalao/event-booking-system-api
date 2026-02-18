@@ -28,7 +28,7 @@ class EventController extends Controller
             $query = $query->where('title', 'like', '%' . $title . '%');
         }
 
-        return $query->get();
+        return ['data' => $query->get()];
     }
 
     /**

@@ -17,6 +17,12 @@ class TicketController extends Controller
             return response()->json(['message' => 'Forbidden'], 403);
         }
 
+        $request->validate([
+            'quantity' => 'required|integer|min:1',
+            'price' => 'required|numeric|min:0',
+            'type' => 'required|string|max:255',
+        ]);
+
         $ticket = Ticket::create([
             'event_id' => $event->id,
             'type' => $request->input('type'),
@@ -34,6 +40,13 @@ class TicketController extends Controller
         if ($ticket->event->created_by !== $request->user()->id && $request->user()->role !== 'admin') {
             return response()->json(['message' => 'Forbidden'], 403);
         }
+
+        $request->validate([
+            'quantity' => 'integer|min:1',
+            'price' => 'numeric|min:0',
+            'type' => 'string|max:255',
+        ]);
+
         $ticket->update($request->all());
         return response()->json($ticket, 200);
     }

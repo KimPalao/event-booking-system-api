@@ -260,7 +260,8 @@ class EventTest extends TestCase
         $response = $this->getJson('/api/events');
 
         $response->assertStatus(200);
-        $response->assertJsonCount(5);
+        $data = $response->json('data');
+        $this->assertCount(5, $data);
     }
 
     public function test_list_title_search(): void
@@ -273,7 +274,8 @@ class EventTest extends TestCase
         $response = $this->getJson('/api/events?title=Laravel');
 
         $response->assertStatus(200);
-        $response->assertJsonCount(1);
+        $data = $response->json('data');
+        $this->assertCount(1, $data);
         $response->assertJsonFragment(['title' => 'Laravel Conference']);
     }
 
@@ -285,6 +287,7 @@ class EventTest extends TestCase
         $response = $this->getJson('/api/events?page=2&rows=5');
 
         $response->assertStatus(200);
-        $response->assertJsonCount(5);
+        $data = $response->json('data');
+        $this->assertCount(5, $data);
     }
 }

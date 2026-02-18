@@ -31,9 +31,11 @@ class PaymentController extends Controller
 
         if ($paymentStatus) {
             $booking->update(['status' => 'confirmed']);
+            return response()->json(['message' => 'Payment successful', 'data' => $payment], 201);
         }
 
-        return response()->json($payment, 201);
+        return response()->json(['message' => 'Payment unsuccessful', 'data' => $payment], 400);
+
     }
 
     public function show(Payment $payment)
