@@ -44,3 +44,8 @@ Run
 ```
 composer run dev
 ```
+
+Run tests
+```
+php artisan test
+```
