@@ -12,11 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('tickets', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->enum('type', ['standard', 'vip']);
             $table->decimal('price', 8, 2);
             $table->integer('quantity');
-            $table->foreignId('event_id')->constrained('events')->onDelete('cascade');
+            $table->foreignUuid('event_id')->constrained('events')->onDelete('cascade');
             $table->timestamps();
         });
     }
