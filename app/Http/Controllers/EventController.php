@@ -12,8 +12,23 @@ class EventController extends Controller
      */
     public function index()
     {
-        // TODO: Implement pagination
-        return Event::with('tickets')->get();
+        $page = request()->query('page', 0);
+        $rows = request()->query('rows', 10);
+        $date = request()->query('date');
+        $title = request()->query('title');
+        $offset = $page * $rows;
+
+        $query = Event::with('tickets')->offset($offset)->limit($rows);
+
+        if ($date) {
+            $query = $query->where('date', $date);
+        }
+
+        if ($title) {
+            $query = $query->where('title', 'like', '%' . $title . '%');
+        }
+
+        return $query->get();
     }
 
     /**
