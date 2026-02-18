@@ -12,7 +12,8 @@ class EventController extends Controller
      */
     public function index()
     {
-        //
+        // TODO: Implement pagination
+        return Event::with('tickets')->get();
     }
 
     /**
@@ -40,9 +41,9 @@ class EventController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Event $event)
     {
-        //
+        return response()->json($event->load('tickets'));
     }
 
     /**

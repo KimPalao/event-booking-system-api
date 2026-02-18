@@ -8,6 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Ticket extends Model
 {
+    public $fillable = [
+        'event_id',
+        'quantity',
+        'type',
+        'price',
+    ];
+
     /** @use HasFactory<\Database\Factories\TicketFactory> */
     use HasFactory, HasUuids;
 

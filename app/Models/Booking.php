@@ -8,6 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Booking extends Model
 {
+    public $fillable = [
+        'user_id',
+        'ticket_id',
+        'quantity',
+        'status',
+    ];
+
     /** @use HasFactory<\Database\Factories\BookingFactory> */
     use HasFactory, HasUuids;
 
