@@ -48,16 +48,24 @@ class EventController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Event $event)
     {
-        //
+        if ($event->created_by !== $request->user()->id && $request->user()->role !== 'admin') {
+            return response()->json(['message' => 'Forbidden'], 403);
+        }
+        $event->update($request->only(['title', 'description', 'date', 'location']));
+        return response()->json($event);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request, Event $event)
     {
-        //
+        if ($event->created_by !== $request->user()->id && $request->user()->role !== 'admin') {
+            return response()->json(['message' => 'Forbidden'], 403);
+        }
+        $event->delete();
+        return response()->json(null, 204);
     }
 }

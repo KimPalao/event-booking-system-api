@@ -16,7 +16,7 @@ Route::controller(AuthController::class)->group(function () {
 Route::controller(EventController::class)->group(function () {
     Route::get('/events', 'index');
     Route::post('/events', 'store')->middleware(['auth:sanctum', HasOrganizerPermissions::class]);
-    Route::get('/events/{id}', 'show');
-    Route::put('/events/{id}', 'update')->middleware(['auth:sanctum', HasOrganizerPermissions::class]);
-    Route::delete('/events/{id}', 'destroy')->middleware(['auth:sanctum', HasOrganizerPermissions::class]);
+    Route::get('/events/{event}', 'show');
+    Route::put('/events/{event}', 'update')->middleware(['auth:sanctum', HasOrganizerPermissions::class]);
+    Route::delete('/events/{event}', 'destroy')->middleware(['auth:sanctum', HasOrganizerPermissions::class]);
 });
